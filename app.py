@@ -214,4 +214,4 @@ def eliminar_pelicula(id_pelicula):
 
 # Punto de entrada para ejecutar el servidor en modo desarrollo
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
