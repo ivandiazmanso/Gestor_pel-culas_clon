@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchlist - Películas por Ver</title>
+    <!-- Enlazamos la hoja de estilos usando url_for para la carpeta static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+
+    <header class="cabecera">
+        <h1>Watchlist: Películas por Ver</h1>
+        <p>Organiza tus estrenos pendientes y lleva el control de lo que ya has visto.</p>
+    </header>
+
+    <main class="contenedor">
+
+        <!-- MENSAJES DE ERROR O ÉXITO ENVIADOS DESDE EL SERVIDOR -->
+        {% if error %}
+            <div class="alerta alerta-error">
+                <strong>Error:</strong> {{ error }}
+            </div>
+        {% endif %}
+
+        {% if mensaje %}
+            <div class="alerta alerta-exito">
+                {{ mensaje }}
+            </div>
+        {% endif %}
+
+        <!-- FORMULARIO PARA AÑADIR PELÍCULA (CREATE - POST) -->
+        <section class="tarjeta-formulario">
+            <h2>Añadir nueva película</h2>
+            <form action="{{ url_for('agregar_pelicula') }}" method="POST" class="formulario">
+                <div class="campo">
+                    <label for="titulo">Título:</label>
+                    <input type="text" id="titulo" name="titulo" placeholder="Ej: Interstellar" required>
+                </div>
+
+                <div class="campo">
+                    <label for="director">Director:</label>
+                    <input type="text" id="director" name="director" placeholder="Ej: Christopher Nolan" required>
+                </div>
+
+                <div class="campo">
+                    <label for="genero">Género:</label>
+                    <select id="genero" name="genero" required>
+                        <option value="">-- Selecciona un género --</option>
+                        <option value="Acción">Acción</option>
+                        <option value="Ciencia Ficción">Ciencia Ficción</option>
+                        <option value="Comedia">Comedia</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Fantasía">Fantasía</option>
+                        <option value="Suspense">Suspense</option>
+                        <option value="Terror">Terror</option>
+                        <option value="Animación">Animación</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primario">Añadir a la Watchlist</button>
+            </form>
+        </section>
+
+        <!-- BARRA DE FILTROS Y CONTADORES -->
+        <section class="barra-filtros">
+            <div class="filtros">
+                <a href="{{ url_for('inicio', filtro='todas') }}"
+                   class="btn-filtro {% if filtro_actual == 'todas' %}activo{% endif %}">
+                    Todas ({{ total }})
+                </a>
+                <a href="{{ url_for('inicio', filtro='pendiente') }}"
+                   class="btn-filtro {% if filtro_actual == 'pendiente' %}activo{% endif %}">
+                    Pendientes ({{ pendientes }})
+                </a>
+                <a href="{{ url_for('inicio', filtro='vista') }}"
+                   class="btn-filtro {% if filtro_actual == 'vista' %}activo{% endif %}">
+                    Vistas ({{ vistas }})
+                </a>
+            </div>
+        </section>
+
+        <!-- LISTADO DE PELÍCULAS (READ, UPDATE, DELETE) -->
+        <section class="lista-peliculas">
+            {% if peliculas %}
+                {% for pelicula in peliculas %}
+                    <!-- Aplicamos una clase distinta según el estado para diferenciarlas visualmente -->
+                    <article class="tarjeta-pelicula {% if pelicula.estado == 'vista' %}estado-vista{% else %}estado-pendiente{% endif %}">
+                        <div class="info-pelicula">
+                            <div class="titulo-fila">
+                                <h3>{{ pelicula.titulo }}</h3>
+                                <span class="etiqueta {{ pelicula.estado }}">
+                                    {{ pelicula.estado | upper }}
+                                </span>
+                            </div>
+                            <p><strong>Director:</strong> {{ pelicula.director }}</p>
+                            <p><strong>Género:</strong> {{ pelicula.genero }}</p>
+                        </div>
+
+                        <div class="acciones">
+                            <!-- Formulario POST para cambiar estado (UPDATE) -->
+                            <form action="{{ url_for('cambiar_estado', id_pelicula=pelicula.id) }}" method="POST">
+                                {% if pelicula.estado == 'pendiente' %}
+                                    <button type="submit" class="btn btn-vista">Marcar como vista</button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-pendiente">Volver a pendiente</button>
+                                {% endif %}
+                            </form>
+
+                            <!-- Formulario POST para eliminar película (DELETE) -->
+                            <form action="{{ url_for('eliminar_pelicula', id_pelicula=pelicula.id) }}" method="POST">
+                                <button type="submit" class="btn btn-eliminar">Eliminar</button>
+                            </form>
+                        </div>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <div class="vacio">
+                    <p>No hay películas en esta lista todavía. Añade tu primer estreno arriba.</p>
+                </div>
+            {% endif %}
+        </section>
+
+    </main>
+
+</body>
+</html>

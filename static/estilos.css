@@ -1,0 +1,237 @@
+/* estilos.css - Estilo oscuro */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #12151c;
+    color: #e6e8ec;
+    line-height: 1.5;
+    padding-bottom: 40px;
+}
+
+/* Cabecera */
+.cabecera {
+    background-color: #1c222e;
+    border-bottom: 3px solid #f5c518; /* Dorado */
+    text-align: center;
+    padding: 25px 15px;
+    margin-bottom: 25px;
+}
+
+.cabecera h1 {
+    color: #f5c518;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.cabecera p {
+    color: #aeb6c4;
+    font-size: 0.95rem;
+}
+
+/* Contenedor principal */
+.contenedor {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Alertas de error y éxito */
+.alerta {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.alerta-error {
+    background-color: #4a1c1c;
+    border: 1px solid #e74c3c;
+    color: #ffd4d4;
+}
+
+.alerta-exito {
+    background-color: #183d29;
+    border: 1px solid #2ecc71;
+    color: #d4ffe5;
+}
+
+/* Formulario */
+.tarjeta-formulario {
+    background-color: #1c222e;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.tarjeta-formulario h2 {
+    margin-bottom: 15px;
+    font-size: 1.25rem;
+    color: #e4b409;
+}
+
+.formulario {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.campo {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label {
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    color: #c7cdd8;
+}
+
+.campo input,
+.campo select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #353f52;
+    background-color: #12151c;
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+/* Botones */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.btn-primario {
+    background-color: #f5c518;
+    color: #12151c;
+}
+
+.btn-primario:hover {
+    background-color: #e0b312;
+}
+
+.btn-vista {
+    background-color: #2ecc71;
+    color: #12151c;
+}
+
+.btn-pendiente {
+    background-color: #e67e22;
+    color: #ffffff;
+}
+
+.btn-eliminar {
+    background-color: #c0392b;
+    color: #ffffff;
+}
+
+/* Filtros */
+.barra-filtros {
+    margin-bottom: 20px;
+}
+
+.filtros {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-filtro {
+    text-decoration: none;
+    color: #c7cdd8;
+    background-color: #1c222e;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid #353f52;
+}
+
+.btn-filtro.activo {
+    background-color: #f5c518;
+    color: #12151c;
+    font-weight: bold;
+    border-color: #f5c518;
+}
+
+/* Tarjetas de películas */
+.lista-peliculas {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tarjeta-pelicula {
+    background-color: #1c222e;
+    border-radius: 8px;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    border-left: 6px solid #f5c518;
+}
+
+/* Diferenciación visual según el estado */
+.tarjeta-pelicula.estado-pendiente {
+    border-left-color: #e67e22;
+}
+
+.tarjeta-pelicula.estado-vista {
+    border-left-color: #2ecc71;
+    opacity: 0.85;
+}
+
+.tarjeta-pelicula.estado-vista h3 {
+    text-decoration: line-through;
+    color: #aeb6c4;
+}
+
+.titulo-fila {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.etiqueta {
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.etiqueta.pendiente {
+    background-color: #e67e22;
+    color: #ffffff;
+}
+
+.etiqueta.vista {
+    background-color: #2ecc71;
+    color: #12151c;
+}
+
+.acciones {
+    display: flex;
+    gap: 10px;
+}
+
+.vacio {
+    text-align: center;
+    padding: 35px;
+    background-color: #1c222e;
+    border-radius: 8px;
+    color: #aeb6c4;
+}
